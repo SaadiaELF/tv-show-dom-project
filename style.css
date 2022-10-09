@@ -51,6 +51,25 @@
   color: var(--dark-blue);
 }
 
+/* Search section */
+.search {
+  display: flex;
+  justify-content: center;
+  margin: 1em;
+}
+
+#search-label {
+  padding: 0 0.5em;
+  color: var(--dark-blue);
+}
+
+#search-input {
+  padding-left: 0.5em;
+  font-family: var(--body-font);
+  font-size: 0.8em;
+  font-weight: 200;
+}
+
 /* Cards */
 #root {
   display: grid;
@@ -106,11 +125,22 @@
 }
 
 @media screen and (min-width:600px) {
+
+  /* Hero */
   .h__title {
     font-size: 3.5em;
   }
 
   .h__subtitle {
     font-size: 1.5em;
+  }
+
+  /* Search */
+  #search-label {
+    font-size: 1.5em;
+  }
+
+  #search-input {
+    font-size: 1em;
   }
 }
