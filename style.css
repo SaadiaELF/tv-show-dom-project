@@ -24,7 +24,7 @@
   display: flex;
   justify-content: end;
   align-items: center;
-  height: 100vh;
+  height: 90vh;
   background-image: url("./img/hero.jpg");
   background-position: right;
   background-size: cover;
@@ -36,7 +36,7 @@
 }
 
 .h__title {
-  margin: 0 20px;
+  margin-right: 20px;
   text-align: end;
   font-family: var(--heading-font);
   font-size: 2em;
@@ -53,12 +53,12 @@
 }
 
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   padding: 2em;
   text-align: center;
   font-size: 0.8em;
   background-color: var(--cream);
-  box-shadow: 0px 0px 15px 5px var(--darker-blue);
+  box-shadow: 0px 10px 20px 5px rgb(0 0 0 / 0.1);
 }
