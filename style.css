@@ -25,7 +25,7 @@
   justify-content: end;
   align-items: center;
   height: 500px;
-  background-image: url("./img/hero1.jpg");
+  background-image: url("./img/hero.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -43,8 +43,18 @@
 .h__subtitle {
   margin-right: 50px;
   text-align: end;
-  font-family: var(--heading-font);
   font-size: 1.5em;
   font-weight: 400;
   color: var(--darker-blue);
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 2em;
+  text-align: center;
+  font-size: 0.8em;
+  background-color: var(--cream);
+  box-shadow: 0px 10px 15px 5px var(--darker-blue);
 }
