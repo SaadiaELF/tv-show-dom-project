@@ -11,12 +11,14 @@ function makePageForEpisodes(episodeList) {
     let titleElt = document.createElement("h2");
     let imgElt = document.createElement("div");
     let textElt = document.createElement("div");
-
+    let episodeNum =
+      episode.number < 10 ? "0" + episode.number : episode.number;
+    
     cardElt.className = "card";
     titleElt.className = "card__title";
     imgElt.className = "card__img";
     textElt.className = "card__text";
-    titleElt.textContent = episode.name;
+    titleElt.textContent = `${episode.name} - S0${episode.season}E${episodeNum}`;
     imgElt.style.backgroundImage = `url(${episode.image.medium})`;
     textElt.innerHTML = episode.summary;
 
