@@ -18,12 +18,16 @@
   font-family: var(--body-font);
 }
 
+body {
+  background-color: #fca2112d;
+}
+
 /* Hero */
 .hero {
   display: flex;
   justify-content: end;
   align-items: center;
-  height: 90vh;
+  height: 100vh;
   background-image: url("./img/hero.jpg");
   background-position: right;
   background-size: cover;
@@ -135,8 +139,7 @@
   padding: 2em;
   text-align: center;
   font-size: 0.8em;
-  background-color: var(--light-grey);
-  box-shadow: 0px 10px 20px 5px rgb(0 0 0 / 0.1);
+  background-color: transparent;
 }
 
 @media screen and (min-width:600px) {
