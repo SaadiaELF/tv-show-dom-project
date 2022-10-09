@@ -1,5 +1,6 @@
 let inputSearch = document.getElementById("search-input");
 const allEpisodes = getAllEpisodes();
+const rootElem = document.getElementById("root");
 
 function setup() {
   makePageForEpisodes(allEpisodes);
@@ -7,7 +8,6 @@ function setup() {
 
 // Loads episodes cards
 function makePageForEpisodes(episodeList) {
-  const rootElem = document.getElementById("root");
   rootElem.innerHTML = "";
   episodeList.map((episode) => {
     let cardElt = document.createElement("div");
@@ -39,13 +39,13 @@ function searchWord(e, episodeList) {
       episode.summary.toLowerCase().includes(word)
   );
 
-  if (word.length == 0 || filteredEpisodes.length == 0) {
-    makePageForEpisodes(episodeList);
+  if (filteredEpisodes.length == 0) {
+    rootElem.innerHTML = "No matching episode";
   } else {
     makePageForEpisodes(filteredEpisodes);
   }
 }
 
-// Event listeners 
+// Event listeners
 inputSearch.addEventListener("input", (e) => searchWord(e, allEpisodes));
 window.onload = setup;
