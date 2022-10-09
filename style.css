@@ -52,17 +52,16 @@
 }
 
 /* Cards */
-.root {
+#root {
   display: grid;
   gap: 1em;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   margin: 1.5rem;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   margin: 1em;
   background-color: var(--light-grey);
   box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.4);
@@ -76,7 +75,6 @@
 }
 
 .card__img {
-  background-image: url("http://static.tvmaze.com/uploads/images/original_untouched/1/2668.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
