@@ -5,6 +5,7 @@ function setup() {
   makePageForEpisodes(allEpisodes);
 }
 
+// Loads episodes cards
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
   rootElem.innerHTML = "";
@@ -29,6 +30,7 @@ function makePageForEpisodes(episodeList) {
   });
 }
 
+// search for episode by word
 function searchWord(e, episodeList) {
   let word = e.target.value.toLowerCase();
   let filteredEpisodes = episodeList.filter(
@@ -44,5 +46,6 @@ function searchWord(e, episodeList) {
   }
 }
 
+// Event listeners 
 inputSearch.addEventListener("input", (e) => searchWord(e, allEpisodes));
 window.onload = setup;
