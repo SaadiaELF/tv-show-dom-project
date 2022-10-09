@@ -1,10 +1,8 @@
 /* Variables */
 :root {
-  --darker-blue: #1d3557;
-  --dark-blue: #457b9d;
-  --light-blue: #a8dadc;
-  --cream: #f1faee;
-  --red: #e63946;
+  --dark-blue: #14213d;
+  --light-grey: #e5e5e5;
+  --yellow: #fca311;
   --white: #FFF;
   --black: #000;
   --heading-font: 'Playfair Display', serif;
@@ -41,7 +39,7 @@
   font-family: var(--heading-font);
   font-size: 2em;
   font-weight: 600;
-  color: var(--darker-blue);
+  color: var(--dark-blue);
 }
 
 .h__subtitle {
@@ -49,7 +47,7 @@
   text-align: end;
   font-size: 1em;
   font-weight: 400;
-  color: var(--darker-blue);
+  color: var(--dark-blue);
 }
 
 .footer {
@@ -59,6 +57,16 @@
   padding: 2em;
   text-align: center;
   font-size: 0.8em;
-  background-color: var(--cream);
+  background-color: var(--light-grey);
   box-shadow: 0px 10px 20px 5px rgb(0 0 0 / 0.1);
+}
+
+@media screen and (min-width:600px) {
+  .h__title {
+    font-size: 3.5em;
+  }
+
+  .h__subtitle {
+    font-size: 1.5em;
+  }
 }
