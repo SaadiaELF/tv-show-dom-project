@@ -32,13 +32,14 @@ function makePageForEpisodes(episodeList) {
 
 // search for episode by word
 function searchWord(e, episodeList) {
+  const searchResults = document.getElementById("search-results");
   let word = e.target.value.toLowerCase();
   let filteredEpisodes = episodeList.filter(
     (episode) =>
       episode.name.toLowerCase().includes(word) ||
       episode.summary.toLowerCase().includes(word)
   );
-
+  searchResults.innerText = `Displaying ${filteredEpisodes.length}/${allEpisodes.length} episodes`;
   if (filteredEpisodes.length == 0) {
     rootElem.innerHTML = "No matching episode";
   } else {

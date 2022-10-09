@@ -78,7 +78,7 @@
 }
 
 #search-results {
-  font-size: 0.8em;
+  font-size: 0.6em;
   padding-left: 0.5em;
   opacity: 0.5;
   align-self: center;
@@ -160,6 +160,6 @@
   }
 
   #search-results {
-    font-size: 1em;
+    font-size: 0.8em;
   }
 }
