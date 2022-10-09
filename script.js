@@ -6,7 +6,19 @@ function setup() {
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
-  // rootElem.textContent = `Got ${episodeList.length} episode(s)`;
+  episodeList.map((episode) => {
+    let cardElt = document.createElement("div");
+    let titleElt = document.createElement("h2");
+    let imgElt = document.createElement("div");
+    let textElt = document.createElement("div");
+    cardElt.className = "card";
+    titleElt.className = "card__title";
+    imgElt.className = "card__img";
+    textElt.className = "card__text";
+
+    cardElt.append(titleElt, imgElt, textElt);
+    rootElem.appendChild(cardElt);
+  });
 }
 
 window.onload = setup;
