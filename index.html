@@ -29,21 +29,28 @@
         </h2>
       </div>
     </section>
-    <section class="search">
-      <label id="search-label" for="search-input"
-        ><i class="fa-solid fa-magnifying-glass"></i
-      ></label>
-      <input
-        id="search-input"
-        type="text"
-        name="search-input"
-        placeholder="Search ..."
-      />
-      <p id="search-results"></p>
+    <section class="header">
+      <select name="episodes" id="episodes">
+        <option value="-1">Select episode</option>
+      </select>
+      <div class="search">
+        <label id="search-label" for="search-input"
+          ><i class="fa-solid fa-magnifying-glass"></i
+        ></label>
+        <input
+          id="search-input"
+          type="text"
+          name="search-input"
+          placeholder="Search ..."
+        />
+        <p id="search-results"></p>
+      </div>
     </section>
     <section id="root"></section>
     <div class="clear"></div>
-    <footer class="footer">This content is from <a href="https://www.tvmaze.com/">TV MAZE</a></footer>
+    <footer class="footer">
+      This content is from <a href="https://www.tvmaze.com/">TV MAZE</a>
+    </footer>
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
 

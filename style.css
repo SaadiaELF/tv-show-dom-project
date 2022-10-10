@@ -55,13 +55,22 @@ body {
   color: var(--dark-blue);
 }
 
-/* Search section */
-.search {
+/* Header */
+.header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin: 1em;
 }
 
+/* Selection  */
+#episodes {
+  width: 150px;
+  font-size: 0.8em;
+  border: 1px solid var(--yellow);
+  border-radius: 10px;
+}
+
+/* Search */
 #search-label {
   padding: 0 0.5em;
   align-self: center;
@@ -151,6 +160,12 @@ body {
 
   .h__subtitle {
     font-size: 1.5em;
+  }
+
+  /* Selection */
+  #episodes {
+    width: 300px;
+    font-size: 1em;
   }
 
   /* Search */

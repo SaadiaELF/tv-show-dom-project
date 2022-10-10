@@ -4,6 +4,7 @@ const rootElem = document.getElementById("root");
 
 function setup() {
   makePageForEpisodes(allEpisodes);
+  selectEpisode(allEpisodes);
 }
 
 // Loads episodes cards
@@ -29,7 +30,18 @@ function makePageForEpisodes(episodeList) {
     rootElem.appendChild(cardElt);
   });
 }
-
+// Select episode
+function selectEpisode(episodeList) {
+  let selectTag = document.getElementById("episodes");
+  episodeList.map((episode, i) => {
+    let option = document.createElement("option");
+    let episodeNum =
+      episode.number < 10 ? "0" + episode.number : episode.number;
+    option.innerText = `S0${episode.season}E${episodeNum} - ${episode.name}`;
+    option.value = i;
+    selectTag.appendChild(option);
+  });
+}
 // search for episode by word
 function searchWord(e, episodeList) {
   const searchResults = document.getElementById("search-results");
