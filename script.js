@@ -1,6 +1,8 @@
-let inputSearch = document.getElementById("search-input");
-const allEpisodes = getAllEpisodes();
+const inputSearch = document.getElementById("search-input");
+const selectTag = document.getElementById("episodes");
+const resetBtn = document.querySelector(".btn-reset");
 const rootElem = document.getElementById("root");
+const allEpisodes = getAllEpisodes();
 
 function setup() {
   makePageForEpisodes(allEpisodes);
@@ -30,18 +32,34 @@ function makePageForEpisodes(episodeList) {
     rootElem.appendChild(cardElt);
   });
 }
+
 // Select episode
 function selectEpisode(episodeList) {
-  let selectTag = document.getElementById("episodes");
-  episodeList.map((episode, i) => {
+  episodeList.map((episode) => {
     let option = document.createElement("option");
     let episodeNum =
       episode.number < 10 ? "0" + episode.number : episode.number;
     option.innerText = `S0${episode.season}E${episodeNum} - ${episode.name}`;
-    option.value = i;
+    option.value = `S0${episode.season}E${episodeNum}`;
     selectTag.appendChild(option);
   });
 }
+// Show selected episode
+function showEpisode(e, episodeList) {
+  let selectedEpisode = e.target.value;
+  if (selectedEpisode == -1) {
+    makePageForEpisodes(episodeList);
+  } else {
+    let matchedEpisode = episodeList.find((episode) => {
+      let episodeNum =
+        episode.number < 10 ? "0" + episode.number : episode.number;
+      let episodeNumber = `S0${episode.season}E${episodeNum}`;
+      return episodeNumber == selectedEpisode;
+    });
+    makePageForEpisodes([matchedEpisode]);
+  }
+}
+
 // search for episode by word
 function searchWord(e, episodeList) {
   const searchResults = document.getElementById("search-results");
@@ -61,4 +79,9 @@ function searchWord(e, episodeList) {
 
 // Event listeners
 inputSearch.addEventListener("input", (e) => searchWord(e, allEpisodes));
+selectTag.addEventListener("change", (e) => showEpisode(e, allEpisodes));
+resetBtn.addEventListener("click", () => {
+  makePageForEpisodes(allEpisodes);
+  selectTag.value = -1;
+});
 window.onload = setup;
