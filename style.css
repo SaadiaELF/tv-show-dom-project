@@ -80,6 +80,12 @@ body {
 }
 
 /* Search */
+.search {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 #search-label {
   margin-left: 1em;
   padding: 0 0.5em;
