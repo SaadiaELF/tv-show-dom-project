@@ -25,7 +25,7 @@ function makePageForEpisodes(episodeList) {
     titleElt.className = "card__title";
     imgElt.className = "card__img";
     textElt.className = "card__text";
-    titleElt.textContent = `${episode.name} - S0${seasonNum}E${episodeNum}`;
+    titleElt.textContent = `${episode.name} - S${seasonNum}E${episodeNum}`;
     imgElt.style.backgroundImage = `url(${episode.image.medium})`;
     textElt.innerHTML = episode.summary;
 
@@ -40,8 +40,10 @@ function selectEpisode(episodeList) {
     let option = document.createElement("option");
     let episodeNum =
       episode.number < 10 ? "0" + episode.number : episode.number;
-    option.innerText = `S0${episode.season}E${episodeNum} - ${episode.name}`;
-    option.value = `S0${episode.season}E${episodeNum}`;
+    let seasonNum = episode.season < 10 ? "0" + episode.season : episode.season;
+
+    option.innerText = `S${seasonNum}E${episodeNum} - ${episode.name}`;
+    option.value = `S${episode.season}E${episode.number}`;
     selectTag.appendChild(option);
   });
 }
@@ -52,9 +54,7 @@ function showEpisode(e, episodeList) {
     makePageForEpisodes(episodeList);
   } else {
     let matchedEpisode = episodeList.find((episode) => {
-      let episodeNum =
-        episode.number < 10 ? "0" + episode.number : episode.number;
-      let episodeNumber = `S0${episode.season}E${episodeNum}`;
+      let episodeNumber = `S${episode.season}E${episode.number}`;
       return episodeNumber == selectedEpisode;
     });
     makePageForEpisodes([matchedEpisode]);
