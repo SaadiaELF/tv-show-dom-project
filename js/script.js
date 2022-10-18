@@ -14,8 +14,8 @@ fetch("https://api.tvmaze.com/shows/82/episodes")
 
 function setup() {
   makePageForEpisodes(allEpisodes);
-  selectEpisode(allEpisodes);
-  selectShow(allShows);
+  displayEpisodesList(allEpisodes);
+  displayShowsList(allShows);
 }
 
 // Loads episodes cards
@@ -44,7 +44,7 @@ function makePageForEpisodes(episodesList) {
 }
 
 // Select episode
-function selectEpisode(episodesList) {
+function displayEpisodesList(episodesList) {
   selectEpisodeTag.innerHTML = `<option value="-1">Select episode</option>`;
   episodesList.map((episode) => {
     let option = document.createElement("option");
@@ -90,7 +90,7 @@ function searchWord(e, episodesList) {
 }
 
 // Select show
-function selectShow(showsList) {
+function displayShowsList(showsList) {
   showsList.sort((a, b) => {
     let aShowName = a.name.toLowerCase();
     let bShowName = b.name.toLowerCase();
@@ -119,6 +119,6 @@ selectEpisodeTag.addEventListener("change", (e) => showEpisode(e, allEpisodes));
 selectShowTag.addEventListener("change", (e) => getShow(e));
 resetBtn.addEventListener("click", () => {
   makePageForEpisodes(allEpisodes);
-  selectTag.value = -1;
+  selectEpisodeTag.value = -1;
 });
 window.onload = setup;
