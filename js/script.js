@@ -8,17 +8,21 @@ let allEpisodes = [];
 let allShows = [];
 let showId;
 
+// Fetch all shows from TVmaze API
 function start() {
-  // Fetch all shows from TVmaze API
   fetch("https://api.tvmaze.com/shows")
     .then((response) => response.json())
-    .then((allShows) => makePageForShows(allShows));
+    .then((allShows) => {
+      makePageForShows(allShows), displayShowsList(allShows);
+    });
 }
 
+// Get all Episodes
 function getEpisodes() {
   makePageForEpisodes(allEpisodes);
   displayEpisodesList(allEpisodes);
 }
+
 // Loads shows cards
 function makePageForShows(showsList) {
   rootElem.innerHTML = "";
@@ -40,6 +44,11 @@ function makePageForShows(showsList) {
 
     titleElt.textContent = show.name;
     imgElt.style.backgroundImage = `url(${show.image.medium})`;
+    listElt.innerHTML = `      
+            <li><b>Rated:</b> ${show.rating.average}</li>
+            <li><b>Genres:</b> ${show.genres.join(" | ")}</li>
+            <li><b>Status:</b> ${show.status}</li>
+            <li><b>Runtime:</b> ${show.runtime}</li>`;
     textElt.innerHTML = show.summary;
     cardElt.append(titleElt, imgElt, listElt, textElt);
     sectionElt.appendChild(cardElt);
