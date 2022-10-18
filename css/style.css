@@ -58,13 +58,20 @@ body {
 /* Header */
 .header {
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   justify-content: start;
   margin: 1em;
 }
 
 /* Selection  */
+.episodes__list {
+  display: flex;
+}
+
 .select {
   width: 150px;
+  margin-left: 0.5rem;
   font-size: 0.8em;
   border: 1px solid var(--yellow);
   border-radius: 10px;
@@ -98,7 +105,6 @@ body {
 
 #search-input {
   width: 120px;
-  height: 25px;
   padding-left: 0.5em;
   font-family: var(--body-font);
   font-size: 0.8em;

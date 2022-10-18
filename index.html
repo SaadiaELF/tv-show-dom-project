@@ -29,20 +29,18 @@
         </h2>
       </div>
     </section>
-    <section class="header">
+    <header class="header">
       <select class="select" name="shows" id="shows">
         <option value="-1">Select show</option>
       </select>
-      <button class="btn-reset">
-        <i class="fa-solid fa-rotate-right"></i>
-      </button>
-      <select class="select" name="episodes" id="episodes">
-        <option value="-1">Select episode</option>
-      </select>
-      <button class="btn-reset">
-        <i class="fa-solid fa-rotate-right"></i>
-      </button>
-
+      <div class="episodes__list">
+        <select class="select" name="episodes" id="episodes">
+          <option value="-1">Select episode</option>
+        </select>
+        <button class="btn-reset">
+          <i class="fa-solid fa-rotate-right"></i>
+        </button>
+      </div>
       <div class="search">
         <label id="search-label" for="search-input"
           ><i class="fa-solid fa-magnifying-glass"></i
@@ -55,7 +53,7 @@
         />
         <p id="search-results"></p>
       </div>
-    </section>
+    </header>
     <section id="root"></section>
     <div class="clear"></div>
     <footer class="footer">
