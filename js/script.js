@@ -22,7 +22,10 @@ function getEpisodes() {
 
 // Loads episodes cards
 function makePageForEpisodes(episodesList) {
+  let sectionElt = document.createElement("section");
+  sectionElt.className = "section--episodes";
   rootElem.innerHTML = "";
+  
   episodesList.map((episode) => {
     let cardElt = document.createElement("div");
     let titleElt = document.createElement("h2");
@@ -31,18 +34,17 @@ function makePageForEpisodes(episodesList) {
     let episodeNum =
       episode.number < 10 ? "0" + episode.number : episode.number;
     let seasonNum = episode.season < 10 ? "0" + episode.season : episode.season;
-
-    cardElt.className = "card";
-    titleElt.className = "card__title";
-    imgElt.className = "card__img";
-    textElt.className = "card__text";
+    cardElt.classList.add("card", "card--episode");
+    titleElt.className = "card__title--episode";
+    imgElt.className = "card__img--episode ";
+    textElt.className = "card__text--episode";
     titleElt.textContent = `${episode.name} - S${seasonNum}E${episodeNum}`;
     imgElt.style.backgroundImage = `url(${episode.image.medium})`;
     textElt.innerHTML = episode.summary;
-
     cardElt.append(titleElt, imgElt, textElt);
-    rootElem.appendChild(cardElt);
+    sectionElt.appendChild(cardElt);
   });
+  rootElem.appendChild(sectionElt);
 }
 
 // Display episodes on select input
