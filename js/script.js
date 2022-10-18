@@ -12,22 +12,49 @@ function start() {
   // Fetch all shows from TVmaze API
   fetch("https://api.tvmaze.com/shows")
     .then((response) => response.json())
-    .then((allShows) => displayShowsList(allShows));
+    .then((allShows) => makePageForShows(allShows));
 }
 
 function getEpisodes() {
   makePageForEpisodes(allEpisodes);
   displayEpisodesList(allEpisodes);
 }
+// Loads shows cards
+function makePageForShows(showsList) {
+  rootElem.innerHTML = "";
+  let sectionElt = document.createElement("section");
+  sectionElt.className = "section--shows";
+
+  showsList.map((show) => {
+    let cardElt = document.createElement("article");
+    let titleElt = document.createElement("h2");
+    let imgElt = document.createElement("div");
+    let listElt = document.createElement("ul");
+    let textElt = document.createElement("div");
+
+    cardElt.classList.add("card", "card--show");
+    titleElt.className = "card__title--show";
+    imgElt.className = "card__img--show";
+    listElt.className = "card__info--show";
+    textElt.className = "card__text--show";
+
+    titleElt.textContent = show.name;
+    imgElt.style.backgroundImage = `url(${show.image.medium})`;
+    textElt.innerHTML = show.summary;
+    cardElt.append(titleElt, imgElt, listElt, textElt);
+    sectionElt.appendChild(cardElt);
+  });
+  rootElem.appendChild(sectionElt);
+}
 
 // Loads episodes cards
 function makePageForEpisodes(episodesList) {
+  rootElem.innerHTML = "";
   let sectionElt = document.createElement("section");
   sectionElt.className = "section--episodes";
-  rootElem.innerHTML = "";
 
   episodesList.map((episode) => {
-    let cardElt = document.createElement("div");
+    let cardElt = document.createElement("article");
     let titleElt = document.createElement("h2");
     let imgElt = document.createElement("div");
     let textElt = document.createElement("div");
