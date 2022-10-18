@@ -63,7 +63,7 @@ body {
 }
 
 /* Selection  */
-#episodes {
+.select {
   width: 150px;
   font-size: 0.8em;
   border: 1px solid var(--yellow);
@@ -181,7 +181,7 @@ body {
   }
 
   /* Selection */
-  #episodes {
+  .select {
     width: 300px;
     font-size: 1em;
   }
