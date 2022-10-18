@@ -25,7 +25,7 @@ function makePageForEpisodes(episodesList) {
   let sectionElt = document.createElement("section");
   sectionElt.className = "section--episodes";
   rootElem.innerHTML = "";
-  
+
   episodesList.map((episode) => {
     let cardElt = document.createElement("div");
     let titleElt = document.createElement("h2");
