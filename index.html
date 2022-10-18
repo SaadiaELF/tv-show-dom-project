@@ -30,27 +30,32 @@
       </div>
     </section>
     <header class="header">
-      <select class="select" name="shows" id="shows">
-        <option value="-1">Select show</option>
-      </select>
-      <div class="episodes__list">
-        <select class="select" name="episodes" id="episodes">
-          <option value="-1">Select episode</option>
+      <div class="select__container">
+        <select class="select" name="shows" id="shows">
+          <option value="-1">Select show</option>
         </select>
-        <button class="btn-reset">
-          <i class="fa-solid fa-rotate-right"></i>
-        </button>
+        <div class="episodes__list">
+          <select class="select" name="episodes" id="episodes">
+            <option value="-1">Select episode</option>
+          </select>
+          <button id="btn-reset">
+            <i class="fa-solid fa-rotate-right"></i>
+          </button>
+        </div>
       </div>
-      <div class="search">
-        <label id="search-label" for="search-input"
-          ><i class="fa-solid fa-magnifying-glass"></i
-        ></label>
-        <input
-          id="search-input"
-          type="text"
-          name="search-input"
-          placeholder="Search ..."
-        />
+
+      <div class="search__container">
+        <div class="search">
+          <label id="search-label" for="search-input"
+            ><i class="fa-solid fa-magnifying-glass"></i
+          ></label>
+          <input
+            id="search-input"
+            type="text"
+            name="search-input"
+            placeholder="Search ..."
+          />
+        </div>
         <p id="search-results"></p>
       </div>
     </header>
@@ -60,9 +65,9 @@
       This content is from <a href="https://www.tvmaze.com/">TV MAZE</a>
     </footer>
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="./js/episodes.js"></script>
+    <!-- <script src="./js/episodes.js"></script> -->
     <!-- Loads a provided function called getAllShows() which returns all sho-->
-    <script src="./js/shows.js"></script>
+    <!-- <script src="./js/shows.js"></script> -->
     <!-- Loads YOUR javascript code -->
     <script src="./js/script.js"></script>
   </body>
