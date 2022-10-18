@@ -28,7 +28,7 @@ body {
   justify-content: end;
   align-items: center;
   height: 100vh;
-  background-image: url("./img/hero.jpg");
+  background-image: url("../img/hero.jpg");
   background-position: right;
   background-size: cover;
   background-repeat: no-repeat;

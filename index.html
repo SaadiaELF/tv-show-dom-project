@@ -16,7 +16,7 @@
       src="https://kit.fontawesome.com/87cbe84bd9.js"
       crossorigin="anonymous"
     ></script>
-    <link href="style.css" rel="stylesheet" />
+    <link href="./css/style.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
 
@@ -30,18 +30,19 @@
       </div>
     </section>
     <section class="header">
-      <select class="select" name="episodes" id="episodes">
-        <option value="-1">Select episode</option>
-      </select>
-      <button class="btn-reset">
-        <i class="fa-solid fa-rotate-right"></i>
-      </button>
       <select class="select" name="shows" id="shows">
         <option value="-1">Select show</option>
       </select>
       <button class="btn-reset">
         <i class="fa-solid fa-rotate-right"></i>
       </button>
+      <select class="select" name="episodes" id="episodes">
+        <option value="-1">Select episode</option>
+      </select>
+      <button class="btn-reset">
+        <i class="fa-solid fa-rotate-right"></i>
+      </button>
+
       <div class="search">
         <label id="search-label" for="search-input"
           ><i class="fa-solid fa-magnifying-glass"></i
@@ -61,9 +62,10 @@
       This content is from <a href="https://www.tvmaze.com/">TV MAZE</a>
     </footer>
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
-
+    <!-- <script src="./js/episodes.js"></script> -->
+    <!-- Loads a provided function called getAllShows() which returns all sho-->
+    <script src="./js/shows.js"></script>
     <!-- Loads YOUR javascript code -->
-    <script src="script.js"></script>
+    <script src="./js/script.js"></script>
   </body>
 </html>
