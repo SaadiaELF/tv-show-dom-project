@@ -89,6 +89,12 @@ function searchWord(e, episodesList) {
 
 // Select show
 function selectShow(showsList) {
+  showsList.sort((a, b) => {
+    let aShowName = a.name.toLowerCase();
+    let bShowName = b.name.toLowerCase();
+    return aShowName < bShowName ? -1 : 1;
+  });
+
   showsList.map((show) => {
     let option = document.createElement("option");
     option.innerText = show.name;
