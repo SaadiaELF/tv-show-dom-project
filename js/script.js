@@ -3,14 +3,9 @@ const selectEpisodeTag = document.getElementById("episodes");
 const selectShowTag = document.getElementById("shows");
 const resetBtn = document.getElementById("btn-reset");
 const rootElem = document.getElementById("root");
-let allEpisodes;
-let allShows;
+let allEpisodes = [];
+let allShows = [];
 let showId;
-
-// Fetch all episodes from TVmaze API
-fetch("https://api.tvmaze.com/shows/82/episodes")
-  .then((response) => response.json())
-  .then((data) => (allEpisodes = data));
 
 // Fetch all shows from TVmaze API
 fetch("https://api.tvmaze.com/shows")
@@ -112,6 +107,8 @@ function displayShowsList(showsList) {
 // Get show by id
 function getShow(e) {
   showId = e.target.value;
+
+  // Fetch all episodes from TVmaze API by selected show
   fetch("https://api.tvmaze.com/shows/" + showId + "/episodes")
     .then((response) => response.json())
     .then((data) => (allEpisodes = data))
