@@ -138,6 +138,7 @@ body {
 /* Shows cards */
 .section--shows {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin: 1.5rem;
 }
@@ -146,7 +147,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
   padding: 1rem;
   margin: 0.5rem;
 }
@@ -158,11 +158,10 @@ body {
 }
 
 .card__img--show {
-  background-image: url("http://static.tvmaze.com/uploads/images/medium_portrait/9/22757.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 275px;
+  height: 300px;
   width: 200px;
 }
 
@@ -276,7 +275,7 @@ body {
     row-gap: 1rem;
     column-gap: 2rem;
     padding: 2rem;
-    margin: 0 5rem;
+    margin: 1rem 5rem;
   }
 
   .card__title--show {
@@ -288,7 +287,6 @@ body {
 
   .card__img--show {
     grid-area: img;
-    height: 100%;
   }
 
   .card__text--show {
