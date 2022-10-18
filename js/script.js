@@ -1,8 +1,9 @@
-const inputSearch = document.getElementById("search-input");
-const selectEpisodeTag = document.getElementById("episodes");
-const selectShowTag = document.getElementById("shows");
-const resetBtn = document.getElementById("btn-reset");
 const rootElem = document.getElementById("root");
+const episodesSelectTag = document.getElementById("episodes");
+const showsSelectTag = document.getElementById("shows");
+const resetBtn = document.getElementById("btn-reset");
+const inputSearch = document.getElementById("search-input");
+const searchResults = document.getElementById("search-results");
 let allEpisodes = [];
 let allShows = [];
 let showId;
@@ -45,7 +46,7 @@ function makePageForEpisodes(episodesList) {
 
 // Select episode
 function displayEpisodesList(episodesList) {
-  selectEpisodeTag.innerHTML = `<option value="-1">Select episode</option>`;
+  episodesSelectTag.innerHTML = `<option value="-1">Select episode</option>`;
   episodesList.map((episode) => {
     let option = document.createElement("option");
     let episodeNum =
@@ -54,7 +55,7 @@ function displayEpisodesList(episodesList) {
 
     option.innerText = `S${seasonNum}E${episodeNum} - ${episode.name}`;
     option.value = `S${episode.season}E${episode.number}`;
-    selectEpisodeTag.appendChild(option);
+    episodesSelectTag.appendChild(option);
   });
 }
 
@@ -73,15 +74,21 @@ function showEpisode(e, episodesList) {
 }
 
 // search for episode by word
-function searchWord(e, episodesList) {
-  const searchResults = document.getElementById("search-results");
+function getEpisodeByWord(e, episodesList) {
   let word = e.target.value.toLowerCase();
   let filteredEpisodes = episodesList.filter(
     (episode) =>
       episode.name.toLowerCase().includes(word) ||
       episode.summary.toLowerCase().includes(word)
   );
-  searchResults.innerText = `Displaying ${filteredEpisodes.length}/${allEpisodes.length} episodes`;
+
+  // Displaying message only if the search input is not empty
+  searchResults.innerText =
+    e.target.value == ""
+      ? ""
+      : `Displaying ${filteredEpisodes.length}/${allEpisodes.length} episodes`;
+
+  // Displaying filtered episodes
   if (filteredEpisodes.length == 0) {
     rootElem.innerHTML = "No matching episode";
   } else {
@@ -101,7 +108,7 @@ function displayShowsList(showsList) {
     let option = document.createElement("option");
     option.innerText = show.name;
     option.value = show.id;
-    selectShowTag.appendChild(option);
+    showsSelectTag.appendChild(option);
   });
 }
 // Get show by id
@@ -116,11 +123,12 @@ function getShow(e) {
 }
 
 // Event listeners
-inputSearch.addEventListener("input", (e) => searchWord(e, allEpisodes));
-selectEpisodeTag.addEventListener("change", (e) => showEpisode(e, allEpisodes));
-selectShowTag.addEventListener("change", (e) => getShow(e));
+inputSearch.addEventListener("input", (e) => getEpisodeByWord(e, allEpisodes));
+episodesSelectTag.addEventListener("change", (e) => showEpisode(e, allEpisodes));
+showsSelectTag.addEventListener("change", (e) => getShow(e));
 resetBtn.addEventListener("click", () => {
   makePageForEpisodes(allEpisodes);
-  selectEpisodeTag.value = -1;
+  episodesSelectTag.value = -1;
+  inputSearch.innerHTML = "";
 });
 window.onload = setup;
