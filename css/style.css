@@ -129,30 +129,83 @@ body {
 }
 
 /* Cards */
-#root {
+
+.card {
+  background-color: var(--light-grey);
+  box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* Shows cards */
+.section--shows {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem;
+}
+
+.card--show {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin: 0.5rem;
+}
+
+.card__title--show {
+  color: var(--dark-blue);
+  font-size: 1.5em;
+  font-family: var(--heading-font);
+}
+
+.card__img--show {
+  background-image: url("http://static.tvmaze.com/uploads/images/medium_portrait/9/22757.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 275px;
+  width: 200px;
+}
+
+.card__text--show {
+  color: var(--dark-blue);
+  font-size: 0.8em;
+}
+
+.card__info--show {
+  width: 100%;
+  padding: 1rem;
+  font-size: 0.8em;
+  background-color: rgba(252, 162, 17, 0.2);
+  border: 1px solid var(--yellow);
+  list-style: none;
+}
+
+/* Episodes cards */
+
+.section--episodes {
   display: grid;
   gap: 1em;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   margin: 1.5rem;
-  text-align: center;
 }
 
-.card {
+.card--episode {
   display: flex;
   flex-direction: column;
+  text-align: center;
   margin: 1em;
   background-color: var(--light-grey);
   box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.4);
 }
 
-.card__title {
-  padding: 0.8em 0;
+.card__title--episode {
+  padding: 0.8rem;
   color: var(--dark-blue);
   text-align: center;
   font-size: 1em;
 }
 
-.card__img {
+.card__img--episode {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -160,7 +213,7 @@ body {
   width: 100%;
 }
 
-.card__text {
+.card__text--episode {
   padding: 1rem;
   color: var(--dark-blue);
   font-size: 0.8em;
@@ -208,4 +261,46 @@ body {
   #search-results {
     font-size: 12px;
   }
+
+
+  /* Shows cards */
+  .section--shows {
+    margin: 3rem;
+  }
+
+  .card--show {
+    display: grid;
+    grid-template-areas: "img title title"
+      "img info info"
+      "img text text";
+    row-gap: 1rem;
+    column-gap: 2rem;
+    padding: 2rem;
+    margin: 0 5rem;
+  }
+
+  .card__title--show {
+    grid-area: title;
+    justify-self: flex-start;
+    align-self: flex-end;
+    font-size: 2em;
+  }
+
+  .card__img--show {
+    grid-area: img;
+    height: 100%;
+  }
+
+  .card__text--show {
+    grid-area: text;
+    font-size: 1em;
+  }
+
+  .card__info--show {
+    grid-area: info;
+    display: flex;
+    gap: 2em;
+    font-size: 1em;
+  }
+
 }
