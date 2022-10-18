@@ -8,15 +8,16 @@ let allEpisodes = [];
 let allShows = [];
 let showId;
 
-// Fetch all shows from TVmaze API
-fetch("https://api.tvmaze.com/shows")
-  .then((response) => response.json())
-  .then((data) => (allShows = data));
+function start() {
+  // Fetch all shows from TVmaze API
+  fetch("https://api.tvmaze.com/shows")
+    .then((response) => response.json())
+    .then((allShows) => displayShowsList(allShows));
+}
 
-function setup() {
+function getEpisodes() {
   makePageForEpisodes(allEpisodes);
   displayEpisodesList(allEpisodes);
-  displayShowsList(allShows);
 }
 
 // Loads episodes cards
@@ -44,7 +45,7 @@ function makePageForEpisodes(episodesList) {
   });
 }
 
-// Select episode
+// Display episodes on select input
 function displayEpisodesList(episodesList) {
   episodesSelectTag.innerHTML = `<option value="-1">Select episode</option>`;
   episodesList.map((episode) => {
@@ -96,7 +97,7 @@ function getEpisodeByWord(e, episodesList) {
   }
 }
 
-// Select show
+// Displays shows on select input
 function displayShowsList(showsList) {
   showsList.sort((a, b) => {
     let aShowName = a.name.toLowerCase();
@@ -111,6 +112,7 @@ function displayShowsList(showsList) {
     showsSelectTag.appendChild(option);
   });
 }
+
 // Get show by id
 function getShow(e) {
   showId = e.target.value;
@@ -119,16 +121,18 @@ function getShow(e) {
   fetch("https://api.tvmaze.com/shows/" + showId + "/episodes")
     .then((response) => response.json())
     .then((data) => (allEpisodes = data))
-    .then(() => setup());
+    .then(() => getEpisodes());
 }
 
 // Event listeners
 inputSearch.addEventListener("input", (e) => getEpisodeByWord(e, allEpisodes));
-episodesSelectTag.addEventListener("change", (e) => showEpisode(e, allEpisodes));
+episodesSelectTag.addEventListener("change", (e) =>
+  showEpisode(e, allEpisodes)
+);
 showsSelectTag.addEventListener("change", (e) => getShow(e));
 resetBtn.addEventListener("click", () => {
   makePageForEpisodes(allEpisodes);
   episodesSelectTag.value = -1;
-  inputSearch.innerHTML = "";
 });
-window.onload = setup;
+
+window.onload = start;
