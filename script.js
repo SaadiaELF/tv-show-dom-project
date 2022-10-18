@@ -2,7 +2,14 @@ const inputSearch = document.getElementById("search-input");
 const selectTag = document.getElementById("episodes");
 const resetBtn = document.querySelector(".btn-reset");
 const rootElem = document.getElementById("root");
-const allEpisodes = getAllEpisodes();
+let allEpisodes;
+const url = "https://api.tvmaze.com/shows/82/episodes";
+
+// Fetch all episodes from TVmaze API
+
+fetch(url)
+  .then((response) => response.json())
+  .then((data) => (allEpisodes = data));
 
 function setup() {
   makePageForEpisodes(allEpisodes);
