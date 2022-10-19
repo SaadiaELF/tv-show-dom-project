@@ -4,6 +4,7 @@ const showsSelectTag = document.getElementById("shows");
 const resetBtn = document.getElementById("btn-reset");
 const inputSearch = document.getElementById("search-input");
 const searchResults = document.getElementById("search-results");
+let showsTitles;
 let allEpisodes = [];
 let allShows = [];
 let showId;
@@ -13,7 +14,12 @@ function start() {
   fetch("https://api.tvmaze.com/shows")
     .then((response) => response.json())
     .then((allShows) => {
-      makePageForShows(allShows), displayShowsList(allShows);
+      makePageForShows(allShows);
+      displayShowsList(allShows);
+      showsTitles = document.querySelectorAll(".card__title--show");
+      showsTitles.forEach((show) => {
+        show.addEventListener("click", (e) => getShowById(e));
+      });
     });
 }
 
@@ -38,6 +44,7 @@ function makePageForShows(showsList) {
 
     cardElt.classList.add("card", "card--show");
     titleElt.className = "card__title--show";
+    titleElt.id = show.id;
     imgElt.className = "card__img--show";
     listElt.className = "card__info--show";
     textElt.className = "card__text--show";
@@ -83,7 +90,7 @@ function makePageForEpisodes(episodesList) {
   rootElem.appendChild(sectionElt);
 }
 
-// Display episodes on select input
+// Display episodes on dropdown menu
 function displayEpisodesList(episodesList) {
   episodesSelectTag.innerHTML = `<option value="-1">Select episode</option>`;
   episodesList.map((episode) => {
@@ -135,7 +142,7 @@ function getEpisodeByWord(e, episodesList) {
   }
 }
 
-// Displays shows on select input
+// Displays shows on dropdown menu
 function displayShowsList(showsList) {
   showsList.sort((a, b) => {
     let aShowName = a.name.toLowerCase();
@@ -152,10 +159,14 @@ function displayShowsList(showsList) {
 }
 
 // Get show by id
-function getShow(e) {
-  showId = e.target.value;
+function getShowById(e) {
+  if (e.target.value) {
+    showId = e.target.value;
+  } else {
+    showId = e.target.id;
+  }
 
-  // Fetch all episodes from TVmaze API by selected show
+  // Fetch all episodes from TVmaze API by show ID
   fetch("https://api.tvmaze.com/shows/" + showId + "/episodes")
     .then((response) => response.json())
     .then((data) => (allEpisodes = data))
@@ -167,7 +178,8 @@ inputSearch.addEventListener("input", (e) => getEpisodeByWord(e, allEpisodes));
 episodesSelectTag.addEventListener("change", (e) =>
   showEpisode(e, allEpisodes)
 );
-showsSelectTag.addEventListener("change", (e) => getShow(e));
+showsSelectTag.addEventListener("change", (e) => getShowById(e));
+
 resetBtn.addEventListener("click", () => {
   makePageForEpisodes(allEpisodes);
   episodesSelectTag.value = -1;
