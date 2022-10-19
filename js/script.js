@@ -179,7 +179,6 @@ episodesSelectTag.addEventListener("change", (e) =>
   showEpisode(e, allEpisodes)
 );
 showsSelectTag.addEventListener("change", (e) => getShowById(e));
-
 resetBtn.addEventListener("click", () => {
   makePageForEpisodes(allEpisodes);
   episodesSelectTag.value = -1;

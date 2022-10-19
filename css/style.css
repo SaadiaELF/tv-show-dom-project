@@ -155,6 +155,11 @@ body {
   color: var(--dark-blue);
   font-size: 1.5em;
   font-family: var(--heading-font);
+  cursor: pointer;
+}
+
+.card__title--show:hover {
+  color: var(--yellow);
 }
 
 .card__img--show {
