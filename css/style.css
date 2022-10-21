@@ -22,6 +22,10 @@ body {
   background-color: #fca2112d;
 }
 
+#root {
+  text-align: center;
+}
+
 /* Hero */
 .hero {
   display: flex;

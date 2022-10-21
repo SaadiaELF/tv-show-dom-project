@@ -13,14 +13,20 @@ let showId;
 function start() {
   fetch("https://api.tvmaze.com/shows")
     .then((response) => response.json())
-    .then((allShows) => {
-      makePageForShows(allShows);
-      displayShowsList(allShows);
-      showsTitles = document.querySelectorAll(".card__title--show");
-      showsTitles.forEach((show) => {
-        show.addEventListener("click", (e) => getShowById(e));
-      });
+    .then((data) => {
+      allShows = data;
+      loadPage();
     });
+}
+
+// load first page with all shows
+function loadPage() {
+  makePageForShows(allShows);
+  displayShowsList(allShows);
+  showsTitles = document.querySelectorAll(".card__title--show");
+  showsTitles.forEach((show) => {
+    show.addEventListener("click", (e) => getShowById(e));
+  });
 }
 
 // Get all Episodes
