@@ -10,30 +10,26 @@ let allEpisodes = [];
 let allShows = [];
 let showId;
 
+// .............Shows Related Functions.....................................................
+
 // Fetch all shows from TVmaze API and load the page
 function start() {
   fetch("https://api.tvmaze.com/shows")
     .then((response) => response.json())
     .then((data) => {
       allShows = data;
-      loadPage();
+      getAllShows();
     });
 }
 
-// load first page with all shows
-function loadPage() {
+// Get all shows and display them on the page + displays shows listing
+function getAllShows() {
   makePageForShows(allShows);
   displayShowsList(allShows);
   showsTitles = document.querySelectorAll(".card__title--show");
   showsTitles.forEach((show) => {
     show.addEventListener("click", (e) => getShowById(e));
   });
-}
-
-// Get all Episodes
-function getEpisodes() {
-  makePageForEpisodes(allEpisodes);
-  displayEpisodesList(allEpisodes);
 }
 
 // Loads shows cards
@@ -69,6 +65,45 @@ function makePageForShows(showsList) {
     sectionElt.appendChild(cardElt);
   });
   rootElem.appendChild(sectionElt);
+}
+
+// Displays shows on dropdown menu
+function displayShowsList(showsList) {
+  showsList.sort((a, b) => {
+    let aShowName = a.name.toLowerCase();
+    let bShowName = b.name.toLowerCase();
+    return aShowName < bShowName ? -1 : 1;
+  });
+
+  showsList.map((show) => {
+    let option = document.createElement("option");
+    option.innerText = show.name;
+    option.value = show.id;
+    showsSelectTag.appendChild(option);
+  });
+}
+
+// Get show by id
+function getShowById(e) {
+  if (e.target.value) {
+    showId = e.target.value;
+  } else {
+    showId = e.target.id;
+  }
+
+  // Fetch all episodes from TVmaze API by show ID
+  fetch("https://api.tvmaze.com/shows/" + showId + "/episodes")
+    .then((response) => response.json())
+    .then((data) => (allEpisodes = data))
+    .then(() => getAllEpisodes());
+}
+
+// .............Episodes Related Functions.....................................................
+
+// Get all Episodes and display them on the page + displays episodes listing
+function getAllEpisodes() {
+  makePageForEpisodes(allEpisodes);
+  displayEpisodesList(allEpisodes);
 }
 
 // Loads episodes cards
@@ -115,7 +150,7 @@ function displayEpisodesList(episodesList) {
 }
 
 // Show selected episode
-function showEpisode(e, episodesList) {
+function getSelectedEpisode(e, episodesList) {
   let selectedEpisode = e.target.value;
   if (selectedEpisode == -1) {
     makePageForEpisodes(episodesList);
@@ -151,41 +186,10 @@ function getEpisodeByWord(e, episodesList) {
   }
 }
 
-// Displays shows on dropdown menu
-function displayShowsList(showsList) {
-  showsList.sort((a, b) => {
-    let aShowName = a.name.toLowerCase();
-    let bShowName = b.name.toLowerCase();
-    return aShowName < bShowName ? -1 : 1;
-  });
-
-  showsList.map((show) => {
-    let option = document.createElement("option");
-    option.innerText = show.name;
-    option.value = show.id;
-    showsSelectTag.appendChild(option);
-  });
-}
-
-// Get show by id
-function getShowById(e) {
-  if (e.target.value) {
-    showId = e.target.value;
-  } else {
-    showId = e.target.id;
-  }
-
-  // Fetch all episodes from TVmaze API by show ID
-  fetch("https://api.tvmaze.com/shows/" + showId + "/episodes")
-    .then((response) => response.json())
-    .then((data) => (allEpisodes = data))
-    .then(() => getEpisodes());
-}
-
 // Event listeners
 inputSearch.addEventListener("input", (e) => getEpisodeByWord(e, allEpisodes));
 episodesSelectTag.addEventListener("change", (e) =>
-  showEpisode(e, allEpisodes)
+  getSelectedEpisode(e, allEpisodes)
 );
 showsSelectTag.addEventListener("change", (e) => getShowById(e));
 resetBtn.addEventListener("click", () => {
@@ -193,7 +197,7 @@ resetBtn.addEventListener("click", () => {
   episodesSelectTag.value = -1;
 });
 homeBtn.addEventListener("click", () => {
- showsSelectTag.value = -1;
+  showsSelectTag.value = -1;
   start();
 });
 
