@@ -38,6 +38,7 @@ function getEpisodes() {
 // Loads shows cards
 function makePageForShows(showsList) {
   rootElem.innerHTML = "";
+  showsSelectTag.style.display = "block";
   let sectionElt = document.createElement("section");
   sectionElt.className = "section--shows";
 
@@ -72,6 +73,7 @@ function makePageForShows(showsList) {
 // Loads episodes cards
 function makePageForEpisodes(episodesList) {
   rootElem.innerHTML = "";
+  showsSelectTag.style.display = "none";
   let sectionElt = document.createElement("section");
   sectionElt.className = "section--episodes";
 
