@@ -86,14 +86,37 @@ body {
   border-radius: 10px;
 }
 
-#btn-reset {
+.btn {
   height: 25px;
   margin: 0 0.5em;
   padding: 0 0.5em;
-  border: 1px solid var(--yellow);
   border-radius: 10px;
+}
+
+.btn-reset {
+  border: 1px solid var(--yellow);
   background-color: var(--yellow);
+}
+
+.btn-reset i {
   color: var(--dark-blue);
+}
+
+.btn-reset:hover {
+  border: 1px solid var(--dark-blue);
+}
+
+.btn-home {
+  border: 1px solid var(--dark-blue);
+  background-color: var(--dark-blue);
+}
+
+.btn-home i {
+  color: var(--yellow);
+}
+
+.btn-home:hover {
+  border: 1px solid var(--yellow);
 }
 
 /* Search */
