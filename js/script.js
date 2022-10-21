@@ -1,7 +1,8 @@
 const rootElem = document.getElementById("root");
 const episodesSelectTag = document.getElementById("episodes");
 const showsSelectTag = document.getElementById("shows");
-const resetBtn = document.getElementById("btn-reset");
+const resetBtn = document.querySelector(".btn-reset");
+const homeBtn = document.querySelector(".btn-home");
 const inputSearch = document.getElementById("search-input");
 const searchResults = document.getElementById("search-results");
 let showsTitles;
@@ -9,7 +10,7 @@ let allEpisodes = [];
 let allShows = [];
 let showId;
 
-// Fetch all shows from TVmaze API
+// Fetch all shows from TVmaze API and load the page
 function start() {
   fetch("https://api.tvmaze.com/shows")
     .then((response) => response.json())
@@ -190,6 +191,10 @@ showsSelectTag.addEventListener("change", (e) => getShowById(e));
 resetBtn.addEventListener("click", () => {
   makePageForEpisodes(allEpisodes);
   episodesSelectTag.value = -1;
+});
+homeBtn.addEventListener("click", () => {
+ showsSelectTag.value = -1;
+  start();
 });
 
 window.onload = start;
