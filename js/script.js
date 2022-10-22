@@ -65,6 +65,10 @@ function makePageForShows(showsList) {
     sectionElt.appendChild(cardElt);
   });
   rootElem.appendChild(sectionElt);
+
+  inputSearch.addEventListener("input", (e) => {
+    getShowByWord(e, allShows);
+  });
 }
 
 // Displays shows on dropdown menu
@@ -96,6 +100,27 @@ function getShowById(e) {
     .then((response) => response.json())
     .then((data) => (allEpisodes = data))
     .then(() => getAllEpisodes());
+}
+
+// search for show by word
+function getShowByWord(e, showsList) {
+  let word = e.target.value.toLowerCase();
+  let filteredShows = showsList.filter(
+    (show) =>
+      show.name.toLowerCase().includes(word) ||
+      show.summary.toLowerCase().includes(word)
+  );
+
+  // Displaying message only if the search input is not empty
+  searchResults.innerText =
+    e.target.value == "" ? "" : `Found ${filteredShows.length} shows`;
+
+  // Displaying filtered shows
+  if (filteredShows.length == 0) {
+    rootElem.innerHTML = "No matching shows";
+  } else {
+    makePageForShows(filteredShows);
+  }
 }
 
 // .............Episodes Related Functions.....................................................
@@ -132,6 +157,9 @@ function makePageForEpisodes(episodesList) {
     sectionElt.appendChild(cardElt);
   });
   rootElem.appendChild(sectionElt);
+  inputSearch.addEventListener("input", (e) => {
+    getEpisodeByWord(e, allEpisodes);
+  });
 }
 
 // Display episodes on dropdown menu
@@ -187,7 +215,6 @@ function getEpisodeByWord(e, episodesList) {
 }
 
 // Event listeners
-inputSearch.addEventListener("input", (e) => getEpisodeByWord(e, allEpisodes));
 episodesSelectTag.addEventListener("change", (e) =>
   getSelectedEpisode(e, allEpisodes)
 );
@@ -195,9 +222,13 @@ showsSelectTag.addEventListener("change", (e) => getShowById(e));
 resetBtn.addEventListener("click", () => {
   makePageForEpisodes(allEpisodes);
   episodesSelectTag.value = -1;
+  searchResults.innerHTML = "";
+  inputSearch.value = "";
 });
 homeBtn.addEventListener("click", () => {
   showsSelectTag.value = -1;
+  searchResults.innerHTML = "";
+  inputSearch.value = "";
   start();
 });
 
