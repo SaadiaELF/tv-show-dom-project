@@ -215,10 +215,16 @@ function getEpisodeByWord(e, episodesList) {
 }
 
 // Event listeners
-episodesSelectTag.addEventListener("change", (e) =>
-  getSelectedEpisode(e, allEpisodes)
-);
-showsSelectTag.addEventListener("change", (e) => getShowById(e));
+episodesSelectTag.addEventListener("change", (e) => {
+  getSelectedEpisode(e, allEpisodes);
+  searchResults.innerHTML = "";
+  inputSearch.value = "";
+});
+showsSelectTag.addEventListener("change", (e) => {
+  getShowById(e);
+  searchResults.innerHTML = "";
+  inputSearch.value = "";
+});
 resetBtn.addEventListener("click", () => {
   makePageForEpisodes(allEpisodes);
   episodesSelectTag.value = -1;
