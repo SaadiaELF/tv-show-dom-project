@@ -31,7 +31,7 @@ function getAllShows() {
   showsTitles.forEach((show) => {
     show.addEventListener("click", (e) => getShowById(e));
   });
-  readMoreBtns = document.querySelectorAll(".card__btn");
+  readMoreBtns = document.querySelectorAll(".card__more-btn");
   readMoreBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       let moreText = btn.nextElementSibling;
@@ -67,8 +67,8 @@ function makePageForShows(showsList) {
     imgElt.className = "card__img--show";
     listElt.className = "card__info--show";
     textElt.className = "card__text--show";
-    spanElt.className = "card__read-more";
-    btnElt.className = "card__btn";
+    spanElt.className = "card__extra-text";
+    btnElt.className = "card__more-btn";
 
     titleElt.textContent = show.name;
     imgElt.style.backgroundImage = `url(${show.image.medium})`;
@@ -78,9 +78,9 @@ function makePageForShows(showsList) {
             <li><b>Status:</b> ${show.status}</li>
             <li><b>Runtime:</b> ${show.runtime}</li>`;
     textElt.innerHTML = summaryText.substring(0, 100);
-    dotsElt.innerHTML = " ...";
+    dotsElt.innerHTML = " ... ";
     spanElt.innerHTML = summaryText.substring(100, summaryText.length);
-    btnElt.innerText = "read more ...";
+    btnElt.innerText = "Read more";
     textElt.append(dotsElt, btnElt, spanElt);
     cardElt.append(titleElt, imgElt, listElt, textElt);
     sectionElt.appendChild(cardElt);
