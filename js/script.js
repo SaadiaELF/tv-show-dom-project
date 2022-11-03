@@ -5,6 +5,7 @@ const resetBtn = document.querySelector(".btn-reset");
 const homeBtn = document.querySelector(".btn-home");
 const inputSearch = document.getElementById("search-input");
 const searchResults = document.getElementById("search-results");
+let readMoreBtns;
 let showsTitles;
 let allEpisodes = [];
 let allShows = [];
@@ -30,6 +31,16 @@ function getAllShows() {
   showsTitles.forEach((show) => {
     show.addEventListener("click", (e) => getShowById(e));
   });
+  readMoreBtns = document.querySelectorAll(".card__btn");
+  readMoreBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      let moreText = btn.nextElementSibling;
+      let dots = btn.previousElementSibling;
+      btn.style.display = "none";
+      moreText.style.display = "inline";
+      dots.style.display = "none";
+    });
+  });
 }
 
 // Loads shows cards
@@ -44,7 +55,11 @@ function makePageForShows(showsList) {
     let titleElt = document.createElement("h2");
     let imgElt = document.createElement("div");
     let listElt = document.createElement("ul");
-    let textElt = document.createElement("div");
+    let textElt = document.createElement("p");
+    let spanElt = document.createElement("span");
+    let dotsElt = document.createElement("span");
+    let btnElt = document.createElement("button");
+    let summaryText = show.summary.replace("<p>", "").replace("</p>", "");
 
     cardElt.classList.add("card", "card--show");
     titleElt.className = "card__title--show";
@@ -52,6 +67,8 @@ function makePageForShows(showsList) {
     imgElt.className = "card__img--show";
     listElt.className = "card__info--show";
     textElt.className = "card__text--show";
+    spanElt.className = "card__read-more";
+    btnElt.className = "card__btn";
 
     titleElt.textContent = show.name;
     imgElt.style.backgroundImage = `url(${show.image.medium})`;
@@ -60,7 +77,11 @@ function makePageForShows(showsList) {
             <li><b>Genres:</b> ${show.genres.join(" | ")}</li>
             <li><b>Status:</b> ${show.status}</li>
             <li><b>Runtime:</b> ${show.runtime}</li>`;
-    textElt.innerHTML = show.summary;
+    textElt.innerHTML = summaryText.substring(0, 100);
+    dotsElt.innerHTML = " ...";
+    spanElt.innerHTML = summaryText.substring(100, summaryText.length);
+    btnElt.innerText = "read more ...";
+    textElt.append(dotsElt, btnElt, spanElt);
     cardElt.append(titleElt, imgElt, listElt, textElt);
     sectionElt.appendChild(cardElt);
   });

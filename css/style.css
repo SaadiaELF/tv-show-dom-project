@@ -202,6 +202,10 @@ body {
   font-size: 0.8em;
 }
 
+.card__read-more {
+  display: none;
+}
+
 .card__info--show {
   width: 100%;
   padding: 1rem;
