@@ -17,16 +17,14 @@ let showId;
 function start() {
   fetch("https://api.tvmaze.com/shows")
     .then((response) => response.json())
-    .then((data) => {
-      allShows = data;
-      getAllShows();
+    .then((allShows) => {
+      getAllShows(allShows);
     });
 }
 
 // Get all shows and display them on the page + displays shows listing
-function getAllShows() {
-  makePageForShows(allShows);
-  displayShowsList(allShows);
+function getAllShows(showsList) {
+  makePageForShows(showsList);
   showsTitles = document.querySelectorAll(".card__title--show");
   showsTitles.forEach((show) => {
     show.addEventListener("click", (e) => getShowById(e));
@@ -88,12 +86,14 @@ function makePageForShows(showsList) {
   rootElem.appendChild(sectionElt);
 
   inputSearch.addEventListener("input", (e) => {
-    getShowByWord(e, allShows);
+    getShowByWord(e, showsList);
   });
+  displayShowsList(showsList);
 }
 
 // Displays shows on dropdown menu
 function displayShowsList(showsList) {
+  showsSelectTag.innerHTML = `<option value="-1">Select Show</option>`;
   showsList.sort((a, b) => {
     let aShowName = a.name.toLowerCase();
     let bShowName = b.name.toLowerCase();
@@ -179,7 +179,7 @@ function makePageForEpisodes(episodesList) {
   });
   rootElem.appendChild(sectionElt);
   inputSearch.addEventListener("input", (e) => {
-    getEpisodeByWord(e, allEpisodes);
+    getEpisodeByWord(e, episodesList);
   });
 }
 
