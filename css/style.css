@@ -312,9 +312,8 @@ body {
     grid-template-areas: "img title title"
       "img info info"
       "img text text";
-    row-gap: 1rem;
     column-gap: 1rem;
-    padding: 1rem;
+    padding: 2rem;
     margin: 1rem 5rem;
   }
 
