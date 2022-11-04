@@ -22,13 +22,18 @@ function start() {
     });
 }
 
-// Get all shows and display them on the page + displays shows listing
+// Get all shows and display them on the page
 function getAllShows(showsList) {
+  // Load shows cards
   makePageForShows(showsList);
+
+  // Load show episodes cards by clicking on the show title
   showsTitles = document.querySelectorAll(".card__title--show");
   showsTitles.forEach((show) => {
     show.addEventListener("click", (e) => getShowById(e));
   });
+
+  // Read more button to reveal more text of the summary
   readMoreBtns = document.querySelectorAll(".card__more-btn");
   readMoreBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -41,7 +46,7 @@ function getAllShows(showsList) {
   });
 }
 
-// Loads shows cards
+// Creates and loads shows cards
 function makePageForShows(showsList) {
   rootElem.innerHTML = "";
   showsSelectTag.style.display = "block";
@@ -85,9 +90,12 @@ function makePageForShows(showsList) {
   });
   rootElem.appendChild(sectionElt);
 
+  // Search input functionality
   inputSearch.addEventListener("input", (e) => {
     getShowByWord(e, showsList);
   });
+
+  // Load shows dropdown menu
   displayShowsList(showsList);
 }
 
@@ -108,7 +116,7 @@ function displayShowsList(showsList) {
   });
 }
 
-// Get show by id
+// Fetch all episodes from TVmaze API by show ID
 function getShowById(e) {
   if (e.target.value) {
     showId = e.target.value;
@@ -116,7 +124,6 @@ function getShowById(e) {
     showId = e.target.id;
   }
 
-  // Fetch all episodes from TVmaze API by show ID
   fetch("https://api.tvmaze.com/shows/" + showId + "/episodes")
     .then((response) => response.json())
     .then((data) => (allEpisodes = data))
@@ -152,7 +159,7 @@ function getAllEpisodes() {
   displayEpisodesList(allEpisodes);
 }
 
-// Loads episodes cards
+// Creates and loads episodes cards
 function makePageForEpisodes(episodesList) {
   rootElem.innerHTML = "";
   showsSelectTag.style.display = "none";
@@ -164,9 +171,8 @@ function makePageForEpisodes(episodesList) {
     let titleElt = document.createElement("h2");
     let imgElt = document.createElement("div");
     let textElt = document.createElement("div");
-    let episodeNum =
-      episode.number < 10 ? "0" + episode.number : episode.number;
-    let seasonNum = episode.season < 10 ? "0" + episode.season : episode.season;
+    let episodeNum = episode.number.toString().padStart(2, "0");
+    let seasonNum = episode.season.toString().padStart(2, "0");
     cardElt.classList.add("card", "card--episode");
     titleElt.className = "card__title--episode";
     imgElt.className = "card__img--episode ";
@@ -188,10 +194,8 @@ function displayEpisodesList(episodesList) {
   episodesSelectTag.innerHTML = `<option value="-1">Select episode</option>`;
   episodesList.map((episode) => {
     let option = document.createElement("option");
-    let episodeNum =
-      episode.number < 10 ? "0" + episode.number : episode.number;
-    let seasonNum = episode.season < 10 ? "0" + episode.season : episode.season;
-
+    let episodeNum = episode.number.toString().padStart(2, "0");
+    let seasonNum = episode.season.toString().padStart(2, "0");
     option.innerText = `S${seasonNum}E${episodeNum} - ${episode.name}`;
     option.value = `S${episode.season}E${episode.number}`;
     episodesSelectTag.appendChild(option);
@@ -236,27 +240,34 @@ function getEpisodeByWord(e, episodesList) {
 }
 
 // Event listeners
-episodesSelectTag.addEventListener("change", (e) => {
-  getSelectedEpisode(e, allEpisodes);
-  searchResults.innerHTML = "";
-  inputSearch.value = "";
-});
+// Onchange event of the dropdown menu selection of the shows
 showsSelectTag.addEventListener("change", (e) => {
   getShowById(e);
   searchResults.innerHTML = "";
   inputSearch.value = "";
 });
-resetBtn.addEventListener("click", () => {
-  makePageForEpisodes(allEpisodes);
-  episodesSelectTag.value = -1;
+
+// Onchange event of the dropdown menu selection of the episodes
+episodesSelectTag.addEventListener("change", (e) => {
+  getSelectedEpisode(e, allEpisodes);
   searchResults.innerHTML = "";
   inputSearch.value = "";
 });
+
+// Go back to all shows view
 homeBtn.addEventListener("click", () => {
   showsSelectTag.value = -1;
   searchResults.innerHTML = "";
   inputSearch.value = "";
   start();
+});
+
+// Go Back to all episodes view
+resetBtn.addEventListener("click", () => {
+  makePageForEpisodes(allEpisodes);
+  episodesSelectTag.value = -1;
+  searchResults.innerHTML = "";
+  inputSearch.value = "";
 });
 
 window.onload = start;
