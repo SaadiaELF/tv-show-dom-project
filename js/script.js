@@ -27,7 +27,7 @@ function getAllShows(showsList) {
   // Load show episodes cards by clicking on the show title
   showsTitles = document.querySelectorAll(".card__title--show");
   showsTitles.forEach((show) => {
-    show.addEventListener("click", (e) => getShowById(e));
+    show.addEventListener("click", (e) => getShowEpisodesById(e));
   });
 
   // Read more button to reveal more text of the summary
@@ -114,13 +114,12 @@ function displayShowsList(showsList) {
 }
 
 // Fetch all episodes from TVmaze API by show ID
-function getShowById(e) {
+function getShowEpisodesById(e) {
   if (e.target.value) {
     showId = e.target.value;
   } else {
     showId = e.target.id;
   }
-
   fetch("https://api.tvmaze.com/shows/" + showId + "/episodes")
     .then((response) => response.json())
     .then((allEpisodes) => getAllEpisodes(allEpisodes));
@@ -253,7 +252,7 @@ function getEpisodeByWord(e, episodesList) {
 // Event listeners
 // Onchange event of the dropdown menu selection of the shows
 showsSelectTag.addEventListener("change", (e) => {
-  getShowById(e);
+  getShowEpisodesById(e);
   searchResults.innerHTML = "";
   inputSearch.value = "";
 });
