@@ -8,7 +8,6 @@ const searchResults = document.getElementById("search-results");
 let readMoreBtns;
 let showsTitles;
 let allEpisodes = [];
-let allShows = [];
 let showId;
 
 // .............Shows Related Functions.....................................................
@@ -17,9 +16,7 @@ let showId;
 function start() {
   fetch("https://api.tvmaze.com/shows")
     .then((response) => response.json())
-    .then((allShows) => {
-      getAllShows(allShows);
-    });
+    .then((allShows) => getAllShows(allShows));
 }
 
 // Get all shows and display them on the page
@@ -126,8 +123,7 @@ function getShowById(e) {
 
   fetch("https://api.tvmaze.com/shows/" + showId + "/episodes")
     .then((response) => response.json())
-    .then((data) => (allEpisodes = data))
-    .then(() => getAllEpisodes());
+    .then((allEpisodes) => getAllEpisodes(allEpisodes));
 }
 
 // search for show by word
@@ -154,9 +150,24 @@ function getShowByWord(e, showsList) {
 // .............Episodes Related Functions.....................................................
 
 // Get all Episodes and display them on the page + displays episodes listing
-function getAllEpisodes() {
-  makePageForEpisodes(allEpisodes);
-  displayEpisodesList(allEpisodes);
+function getAllEpisodes(episodesList) {
+  makePageForEpisodes(episodesList);
+  displayEpisodesList(episodesList);
+
+  // Onchange event of the dropdown menu selection of the episodes
+  episodesSelectTag.addEventListener("change", (e) => {
+    getSelectedEpisode(e, episodesList);
+    searchResults.innerHTML = "";
+    inputSearch.value = "";
+  });
+
+  // Go Back to all episodes view
+  resetBtn.addEventListener("click", () => {
+    makePageForEpisodes(episodesList);
+    episodesSelectTag.value = -1;
+    searchResults.innerHTML = "";
+    inputSearch.value = "";
+  });
 }
 
 // Creates and loads episodes cards
@@ -247,27 +258,12 @@ showsSelectTag.addEventListener("change", (e) => {
   inputSearch.value = "";
 });
 
-// Onchange event of the dropdown menu selection of the episodes
-episodesSelectTag.addEventListener("change", (e) => {
-  getSelectedEpisode(e, allEpisodes);
-  searchResults.innerHTML = "";
-  inputSearch.value = "";
-});
-
 // Go back to all shows view
 homeBtn.addEventListener("click", () => {
   showsSelectTag.value = -1;
   searchResults.innerHTML = "";
   inputSearch.value = "";
   start();
-});
-
-// Go Back to all episodes view
-resetBtn.addEventListener("click", () => {
-  makePageForEpisodes(allEpisodes);
-  episodesSelectTag.value = -1;
-  searchResults.innerHTML = "";
-  inputSearch.value = "";
 });
 
 window.onload = start;
