@@ -6,6 +6,7 @@
   --white: #FFF;
   --black: #000;
   --heading-font: 'Playfair Display', serif;
+  --sub-heading-font: 'Roboto', sans-serif;
   --body-font: 'Poppins', sans-serif;
 }
 
@@ -240,6 +241,7 @@ body {
   padding: 0.8rem;
   text-align: center;
   font-size: 1em;
+  font-family: var(--sub-heading-font);
 }
 
 .card__img--episode {
