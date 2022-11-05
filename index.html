@@ -31,18 +31,20 @@
     </section>
     <header class="header">
       <div class="select__container">
-        <select class="select" name="shows" id="shows">
-          <option value="-1">Select show</option>
-        </select>
+        <div class="shows__list">
+          <select class="select" name="shows" id="shows">
+            <option value="-1">Select show</option>
+          </select>
+          <button class="btn btn-home">
+            <i class="fa-sharp fa-solid fa-house"></i>
+          </button>
+        </div>
         <div class="episodes__list">
           <select class="select" name="episodes" id="episodes">
             <option value="-1">Select episode</option>
           </select>
           <button class="btn btn-reset">
             <i class="fa-solid fa-rotate-right"></i>
-          </button>
-          <button class="btn btn-home">
-            <i class="fa-sharp fa-solid fa-house"></i>
           </button>
         </div>
       </div>

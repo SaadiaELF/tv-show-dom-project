@@ -77,6 +77,10 @@ body {
   display: flex;
 }
 
+.shows__list {
+  display: flex;
+}
+
 .select {
   width: 150px;
   height: 25px;
